@@ -6,17 +6,12 @@ fun main() {
     }
 
     fun List<Int>.getNext(): Int {
-        if (last() == 0) return 0
+        if (all { it == 0 }) return 0
         return last() + zipWithNext { a, b -> b - a }.getNext()
     }
 
-    fun List<Int>.getPrev(): Int {
-        if (last() == 0) return 0
-        return first() - zipWithNext { a, b -> b - a }.getPrev()
-    }
-
     fun part1(input: String) = parse(input).sumOf { it.getNext() }
-    fun part2(input: String) = parse(input).sumOf { it.getPrev() }
+    fun part2(input: String) = parse(input).sumOf { it.asReversed().getNext() }
 
     val test = """
         0 3 6 9 12 15
